@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogsController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,13 +14,16 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::view('compose','/compose');
+Route::get('/',function(){
+    return view("compose");
+});
 Route::view('blogs','/blogs');
 Route::view('myblog','/myblog');
-
-Route::post("posts",[BlogsController::class,'saveBlog']);
-Route::get('/posts',[BlogsController::class,'retrieveBlogs']);
-
+Route::view('login','/login');
+Route::view("/signup","register");
+Route::post("/",[BlogsController::class,'saveBlog']);
+Route::get('/blogs',[BlogsController::class,'getBlogs']);
+Route::post('/signup',[UserController::class,'userHandler']);
 
 
 

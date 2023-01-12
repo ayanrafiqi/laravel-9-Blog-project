@@ -5,10 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class blog extends Model
+class Blog extends Model
 {
     use HasFactory;
-    protected $table='blogs';  
-    protected $primaryKey='id';  
-
+    public $timestamps = false;
 }
