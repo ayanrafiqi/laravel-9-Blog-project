@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class BlogsController extends Controller
 {
-    function saveBlog(Request $req)
+    function createBlog(Request $req)
     {
         $req->validate([
             'title' => 'required |max:20',
@@ -16,6 +16,7 @@ class BlogsController extends Controller
         $blog = new Blog;
         $blog->title = $req->title;
         $blog->content = $req->content;
+        $blog->userId = $req->session()->get('loginId');
         $blog->save();
         return redirect('blogs');
     }
@@ -29,5 +30,25 @@ class BlogsController extends Controller
                 'blogs' => $data
             ]
         );
+    }
+
+    function getMyBlogs(Request $req)
+    {
+        $user_id = $req->session()->get('loginId');
+        $data = Blog::join('users', 'blogs.userId', '=', 'users.userId')
+            ->where('blogs.userId', $user_id)
+            ->get(['blogs.title', 'blogs.content', 'users.name']);
+        return view(
+            "myblogs",
+            ['myblogs' => $data]
+
+        );
+    }
+
+    function deleteBlog($id)
+    {
+        $data = Blog::find($id);
+        $data->delete();
+        return redirect("blogs");
     }
 }

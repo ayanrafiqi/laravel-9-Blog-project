@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Http\Middleware;
+
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -14,19 +16,24 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',function(){
-    return view("compose");
+
+Route::get('/', function () {
+    return view("home");
 });
-Route::view('blogs','/blogs');
-Route::view('myblog','/myblog');
-Route::view('login','/login');
-Route::view("/signup","register");
-Route::post("/",[BlogsController::class,'saveBlog']);
-Route::get('/blogs',[BlogsController::class,'getBlogs']);
-Route::post('/signup',[UserController::class,'userHandler']);
-
-
-
-
-
-
+Route::get('/logout', function () {
+    if (session()->has('loginId')) {
+        session()->pull('loginId', null);
+    }
+    return redirect("/login");
+});
+Route::view('/compose', 'compose');
+Route::view('/blogs', 'blogs');
+Route::view('/myblogs', 'myblogs');
+Route::view('/login', 'login');
+Route::view("/signup", "register");
+Route::post("/compose", [BlogsController::class, 'createBlog']);
+Route::get('/blogs', [BlogsController::class, 'getBlogs']);
+Route::get('/myblogs',[BlogsController::class,'getMyBlogs']);
+Route::get("/delete/{id}", [BlogsController::class, 'deleteBlog']);
+Route::post('/signup', [UserController::class, 'createUser']);
+Route::post('/login',[UserController::class,'loginUser']);

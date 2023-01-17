@@ -1,10 +1,12 @@
-
-<link rel="stylesheet" href="/resources/css/app.css">
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" type="text/css" href="{{asset('css/app.css') }}" >
 </div>
-
+</head>
+<body>
 <div class="footer-padding"></div>
 <div class="footer">
-  Made with ❤️ by The Ayan Rafiqi
+  Made by Ayan Rafiqi
 </div>
 </div>
 </body>
