@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class requireAuth
+class alreadyLoggedIn
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,8 @@ class requireAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!session()->has("loginId")) {
-            return redirect('noaccess')->withErrors('401 Unauthorized access', 'Please Login to continue');
+        if (session()->has("loginId") && (url('login') == $request->url() || url('signup') == $request->url())) {
+            return back();
         }
 
         return $next($request);

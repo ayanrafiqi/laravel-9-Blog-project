@@ -26,14 +26,16 @@ Route::get('/logout', function () {
     }
     return redirect("/login");
 });
-Route::view('/compose', 'compose');
-Route::view('/blogs', 'blogs');
-Route::view('/myblogs', 'myblogs');
-Route::view('/login', 'login');
-Route::view("/signup", "register");
+Route::view('/compose', 'compose')->middleware('requireAuth');
+Route::view('/blogs', 'blogs')->middleware('requireAuth');
+Route::view('/myblogs', 'myblogs')->middleware('requireAuth');
+Route::view('/login', 'login')->middleware('alreadyLoggedIn');
+Route::view("/signup", "register")->middleware('alreadyLoggedIn');
+Route::view('/noaccess','noaccess');
 Route::post("/compose", [BlogsController::class, 'createBlog']);
-Route::get('/blogs', [BlogsController::class, 'getBlogs']);
-Route::get('/myblogs',[BlogsController::class,'getMyBlogs']);
+Route::get('/blogs', [BlogsController::class, 'getBlogs'])->middleware('requireAuth');
+Route::get('/myblogs',[BlogsController::class,'getMyBlogs'])->middleware('requireAuth');
 Route::get("/delete/{id}", [BlogsController::class, 'deleteBlog']);
 Route::post('/signup', [UserController::class, 'createUser']);
 Route::post('/login',[UserController::class,'loginUser']);
+

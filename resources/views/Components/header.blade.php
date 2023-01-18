@@ -15,11 +15,15 @@
       <ul class="nav navbar-nav navbar-right">
 
         <li id="Home"><a href="/">Home</a></li>
+        <li id="Compose"><a href="/compose">Compose</a></li>
         <li id="Blogs"><a href="/blogs">All blogs</a></li>
         <li id="My Blogs"><a href="/myblogs">My Blogs</a></li>
+        @if(!session()->has("loginId"))
         <li id="login"><a href="/login">Login</a></li>
         <li id="signup"><a href="/signup">Signup</a></li>
+         @else
         <li id="logout"><a href="/logout">logout</a></li>
+        @endif
       </ul>
     </div>
   </nav>

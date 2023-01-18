@@ -22,8 +22,9 @@ class UserController extends Controller
         $user->name = $req->name;
         $user->email = strtolower($req->email);
         $user->password = Hash::make($req->password);
+        $req->session()->put('loginId', $user->userId);
         $user->save();
-        return redirect('/');
+        return redirect('/login');
     }
 
     function loginUser(Request $req)
@@ -42,7 +43,7 @@ class UserController extends Controller
         if ($user) {
             if (Hash::check($password, $user->password)) {
                 $req->session()->put('loginId', $user->userId);
-                  return redirect("/compose");
+                return redirect("/compose");
             } else {
                 return back()->withErrors('password is not correct');
             }

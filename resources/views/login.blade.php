@@ -18,7 +18,7 @@
         <span style="color:red">@error('password'){{$message}}@enderror</span>
         </br>
         <Button class="btn">Login</Button>
-        <a href ="signup" >New User !! Register Here.</a>
+        <a href="signup">New User !! Register Here.</a>
     </form>
 </body>
 <x-footer />

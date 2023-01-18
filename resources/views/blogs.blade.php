@@ -11,7 +11,8 @@
     @foreach($blogs as $blog)
     <article>
         <h2>{{$blog->title}}</h2>
-        <div> {{$blog->content; }} </div>          
+        <div> {{$blog->content }} </div>
+        <h4 style="color:blue">Posted by: <span>{{$blog->name}}</span></h4>
     </article>
     @endforeach
 </body>

@@ -7,11 +7,11 @@
 
 <body>
     <h1> My Blogs </h1>
-    @foreach($myblogs as $item)
+    @foreach($myblogs as $blog)
     <article>
-        <h2>{{$item->title}}</h2>
-        <div> {{$item->content}} </div>
-        <a href={{"delete/".$item['id']}} style="padding: 14px 25px;"> Delete </a>
+        <h2>{{$blog->title}}</h2>
+        <div> {{$blog->content}} </div>
+        <a href={{"delete/".$blog['id']}} style="padding: 14px 25px;"> Delete </a>
     </article>
     @endforeach
 </body>

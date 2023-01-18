@@ -23,7 +23,7 @@
         <label for="repassword">Confirm Password</label>
         <input type="password" name="confirmpassword" placeholder="Enter your password again" /></br>
         <span style="color:red">@error('confirmpassword'){{$message}}@enderror</span>
-          
+
         <Button class="btn">Sigup</Button>
         <a href="login">Already Registered !! Login Here</a>
     </form>
